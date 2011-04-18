@@ -1,6 +1,9 @@
 #!/usr/bin/env perl
 
 use strict;
+use warnings;
+use utf8;
+
 package ExampleBot;
 use base 'Bot::BasicBot';
 
@@ -24,10 +27,9 @@ sub connected {
 
 # when said
 sub said {
-	my $self = shift;
-	my $message = shift;
-	my $body = $message->{body};
-	printf("said: message=%s, body=%s\n", $message, $body);
+	my ($self, $mess) = @_;
+	my $body = $mess->{body};
+	printf("said: message=%s, body=%s\n", $mess, $body);
 	#return sprintf("Hello: %s", $body);
 	# if don't say return 0
 	return 0;
@@ -35,40 +37,35 @@ sub said {
 
 # when join channel
 sub chanjoin {
-	my $self = shift;
-	my $mess = shift;
+	my ($self, $mess) = @_;
 	printf("chainjoin: who=%s, channel=%s\n", $mess->{who}, $mess->{channel});
 	return 0;
 }
 
 # when leaves channel
 sub chanpart {
-	my $self = shift;
-	my $mess = shift;
+	my ($self, $mess) = @_;
 	printf("chanpart: channel=%s, names=%s\n", $mess->{channel}, $mess->{names});
 }
 
 # when change topic
 sub topic {
-	my $self = shift;
-	my $mess = shift;
+	my ($self, $mess) = @_;
 	printf("topic: who=%s channel=%s, topic=%s\n", $mess->{who}, $mess->{channel}, $mess->{topic});
 }
 
 # when kicked from channel 
 sub kicked {
-	my $self = shift;
-	my $mess = shift;
+	my ($self, $mess) = @_;
 	printf("kicked: who=%s channel=%s, kicked=%s, reason=%s\n", $mess->{who}, $mess->{channel}, $mess->{kicked}, $mess->{reason});
 }
 
 # event called every regularly.
 # The default tick is called 5 seconds after the bot starts
 sub tick {
-	my $self = shift;
-	my $mess = shift;
+	my ($self, $mess) = @_;
 	printf("tick");
 	return 0;
 }
 
-ExampleBot->new(%conf)->run();
+__PACKAGE__->new(%conf)->run();
