@@ -62,6 +62,8 @@ sub kicked {
 	printf("kicked: who=%s channel=%s, kicked=%s, reason=%s\n", $mess->{who}, $mess->{channel}, $mess->{kicked}, $mess->{reason});
 }
 
+# event called every regularly.
+# The default tick is called 5 seconds after the bot starts
 sub tick {
 	my $self = shift;
 	my $mess = shift;
