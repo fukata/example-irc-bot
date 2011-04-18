@@ -19,7 +19,7 @@ my %conf = (
 sub connected {
 	my $self = shift;
 	print "connected\n";
-	#$self->say( (who => 'f_bot', channel => '#eng', body => 'Hello World') );
+	#$self->say( (who => 'NICKNAME', channel => '#hoge', body => 'Hello World') );
 }
 
 # when said
