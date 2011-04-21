@@ -1,7 +1,5 @@
 var irc = exports;
 var server = irc.server = require('./irc.js').server;
-console.log("=========BASIC========");
-console.log("server: %s",server);
 
 server.events = {};
 server.prototype.checkEvent = function(ev_name) {
