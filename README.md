@@ -4,5 +4,5 @@ Examples IRC Bot.
 ## Dependences
 ### Perl
     apt-get install libbot-basicbot-perl
-### Perl
+### node.js 
     npm install underscore
