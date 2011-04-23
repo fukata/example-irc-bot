@@ -39,6 +39,7 @@ manager.prototype.loadCore=function()
 {
 	var files=fs.readdirSync('./plugins/core');
 	var self=this;
+	files.sort(); //sort filenames to read.
 	_.each(files,function(file){
 		if(self.isFile(fs.realpathSync('./plugins/core/'+file)))
 		{
