@@ -2,7 +2,7 @@ var irc = exports;
 var server = irc.server = require('./irc.js').server;
 var _ = require('underscore');
 
-server.events = {};
+server.prototype.events = {};
 server.prototype.checkEvent = function(ev_name) {
 	if (!this.events) {
 		return false;
@@ -13,6 +13,19 @@ server.prototype.checkEvent = function(ev_name) {
 		return false;
 	}
 }
+
+//register some event functions.
+server.prototype.hooks = function(events) {
+	var self = this;
+	_.each(events, function(callback, eventName) {
+		self.events[eventName] = callback;
+	});
+};
+
+//register a event function.
+server.prototype.hook = function(eventName, callback) {
+	this.events[eventName] = callback;
+};
 
 var eventNames = [
 	'onConnect', 'onDisconnect', 'onData', 'onTooManyChannels', 'onNicknameInUse',

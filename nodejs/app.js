@@ -29,16 +29,23 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', function(req, res){
-  var irc=require('./basic_irc.js');
+  var irc = require('./basic_irc.js');
   var channel = '#dev';
   irc = new irc.server({'host':'HOSTNAME','port':6667,'ssl':false,'ping':true, 'nick':'NICKNAME'});
-  irc.events = {
+  //register hooks.
+  irc.hooks({
 	onConnect: function (params) {
 		console.log('onConnect');
 	        this.enterChannel(channel);
 	        this.say(channel, 'HelloWorld');
+	},
+	onData: function (data) {
+		console.log('onData');
 	}
-  };
+  });
+  //register a hook.
+  irc.hook('onNumerical', function() { console.log('onNumerical');});
+
   irc.connect({'nick':'NICKNAME','pass':'','user':'USERNAME','real':'REALNAME'});
   res.render('index', {
     title: 'Express'
